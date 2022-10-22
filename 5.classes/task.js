@@ -99,5 +99,70 @@ class Library {
         }
     }
 
-
 } 
+
+
+class Student {
+    constructor(name) {
+      this.name = name;
+    }
+
+ 
+    addMark(mark, subjectName) {
+        if (this.subject === undefined) {
+            this.subject = [new Subject(mark, subjectName)];
+        } else {
+            if (this.subject.some(e => e.name === subjectName)) {
+                let index = this.subject.findIndex(e => e.name === subjectName);
+                (this.subject[index].mark).push(mark);
+            } else {
+            this.subject.push(new Subject(mark, subjectName));
+            }
+        }    
+    }
+
+    getAverageBySubject(subjectName) {
+        if (this.subject.some(e => e.name === subjectName)) {
+            let index = this.subject.findIndex(e => e.name === subjectName);
+            let arrElements = Object.assign(this.subject[index].mark);
+            let sum = arrElements.reduce((acc, item) => { return acc + item; }, 0);
+            let average = sum / arrElements.length; 
+            return average; 
+        } else {
+            return "несуществующий предмет";
+        }              
+    }
+
+
+    getAverage() {
+        let average = 0;
+        let averageSubject = 0;
+        for (let i = 0; i < this.subject.length; i ++) {
+            let arrElements = Object.assign(this.subject[i].mark);
+            let sum = arrElements.reduce((acc, item) => { return acc + item; }, 0);
+            averageSubject += sum / arrElements.length; 
+        }
+        average = averageSubject / this.subject.length;
+        return average;
+    }
+      
+    exclude() {
+        if (this.subject.some(e => e.mark.some(e => e < 1) || e.mark.some(e => e > 5))) {
+            return "Исключен за попытку подделать оценки";
+        }
+    } 
+}
+
+class Subject {
+    constructor(mark, subjectName) {
+        this.name = subjectName;
+        if (this.mark === undefined) {
+            this.mark = [mark]; 
+        } else {
+            this.mark.push(mark);
+        }
+    }
+}
+
+
+
