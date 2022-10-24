@@ -109,6 +109,10 @@ class Student {
 
  
     addMark(mark, subjectName) {
+        if (mark < 1 || mark > 5) {
+            return "Ошибка, оценка должна быть числом от 1 до 5";
+        }
+
         if (this.subject === undefined) {
             this.subject = [new Subject(mark, subjectName)];
         } else {
