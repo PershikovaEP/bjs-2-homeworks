@@ -40,10 +40,10 @@ function getTriangle(a, b, c) {
     try {
         return new Triangle(a, b, c);
     } catch(error) {
-        let triangle = {a, b, c};
-        triangle.getPerimeter = () => {return "Ошибка! Треугольник не существует"};
-        triangle.getArea = () => {return "Ошибка! Треугольник не существует"};
-        return triangle;
+        return {
+            getPerimeter: () => "Ошибка! Треугольник не существует",
+            getArea: () => "Ошибка! Треугольник не существует"
+          }
     }
 }
 
