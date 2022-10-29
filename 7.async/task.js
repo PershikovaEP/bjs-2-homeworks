@@ -98,13 +98,13 @@ function testCase() {
 function testCase1() { 
     clock.addClock(newTime(1), () => console.log("Пора вставать"), 4);
     clock.removeClock(4);
-    console.log(clock.printAlarms());
+    clock.printAlarms();
 }
 
 function testCase2() { 
     clock.addClock(newTime(2), () => console.log("Пора вставать"), 5);
     clock.start();
-    setTimeout(() => clock.stop(), 350000);
+    setTimeout(clock.stop(), 350000);
     clock.clearAlarms();
     clock.printAlarms();
 }
