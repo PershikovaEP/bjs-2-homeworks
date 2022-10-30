@@ -41,14 +41,13 @@ class AlarmClock {
 
         function checkClock(call) {                            
             if (call.time === clock.getCurrentFormattedTime()) {
-                return call.callback;
+                return call.callback();
             }
         }
-        //не запускается интервал
-
+        
         if (this.timerId === null) {
             this.timerId = setInterval(() => {
-                (clock.alarmCollection).forEach((items) => checkClock(items));
+                (clock.alarmCollection).forEach((items) => console.log(items));
             });          
         }
     }
@@ -85,27 +84,40 @@ function newTime(minute) {
     return newTime;
 }
 
-function testCase() { 
+function testCase() { //добавление звонков
     clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Пора вставать"), 1);
     clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Пора вставать"), 2);
     clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Пора вставать"), 3);
     clock.printAlarms();
     clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Давай, вставай уже!"), 1);
-    clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Вставай!"));
-    
+    clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Вставай!"));  
+      
 }
 
-function testCase1() { 
-    clock.addClock(newTime(1), () => console.log("Пора вставать"), 4);
+function testCase1() { //удаление одного звонка
+    clock.addClock(newTime(2), () => console.log("Пора вставать"), 4);
     clock.removeClock(4);
     clock.printAlarms();
 }
 
-function testCase2() { 
-    clock.addClock(newTime(1), () => console.log("Пора вставать"), 4);
-    clock.addClock(newTime(2), () => console.log("Пора вставать"), 5);
+function testCase2() { //старт звонка
+    clock.addClock(newTime(1), () => console.log("Пора вставать"), 5);
     clock.start();
-    setTimeout(clock.stop(), 125000);
+        
+}
+
+function testCase3() { //стоп звонка
+    clock.addClock(newTime(1), () => console.log("Пора вставать"), 9);
+    clock.start();
+    clock.stop();
+    
+}
+
+function testCase4() { //удаление всех звонков
+    clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Пора вставать"), 6);
+    clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Пора вставать"), 7);
+    clock.addClock(clock.getCurrentFormattedTime(), () => console.log("Пора вставать"), 8);
     clock.clearAlarms();
     clock.printAlarms();
+      
 }
