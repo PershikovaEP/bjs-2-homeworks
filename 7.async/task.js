@@ -48,7 +48,7 @@ class AlarmClock {
 
         if (this.timerId === null) {
             this.timerId = setInterval(() => {
-                (this.alarmCollection).forEach((items) => checkClock(items));
+                (clock.alarmCollection).forEach((items) => checkClock(items));
             });          
         }
     }
@@ -102,9 +102,10 @@ function testCase1() {
 }
 
 function testCase2() { 
+    clock.addClock(newTime(1), () => console.log("Пора вставать"), 4);
     clock.addClock(newTime(2), () => console.log("Пора вставать"), 5);
     clock.start();
-    setTimeout(clock.stop(), 350000);
+    setTimeout(clock.stop(), 125000);
     clock.clearAlarms();
     clock.printAlarms();
 }
