@@ -46,7 +46,7 @@ class AlarmClock {
         
         if (this.timerId === null) {
             this.timerId = setInterval(() => {
-                (this.alarmCollection).forEach((call) => console.log(call));
+                (this.alarmCollection).forEach((call) => checkClock(call));
             });          
         }
     }
